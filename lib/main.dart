@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,6 +15,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  var formPrice;
   var rank;
   var coinSymbol;
   var name;
@@ -27,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       this.coinSymbol = results['data']['symbol'];
       this.rank = results['data']['rank'];
       this.name = results['data']['name'];
-      this.priceUsd = results['data']['priceUsd'];
+      var poop = this.priceUsd = results['data']['priceUsd'];
     });
   }
 
@@ -51,7 +54,7 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             Container(
               child: coinSymbol != null
-                  ? getCurrencyIcon(coinSymbol)
+                  ? getCurrencyIcon(coinSymbol.toString())
                   : "Loading...",
               color: Colors.black,
               height: 200.00,
@@ -60,10 +63,12 @@ class _MyAppState extends State<MyApp> {
             Container(
               child: priceUsd != null
                   ? Center(
-                      child: Text(
-                      priceUsd.toString(),
-                      style: TextStyle(color: Colors.white),
-                    ))
+                      child: Text(priceUsd,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30.00,
+                          )))
                   : "Loading...",
               color: Colors.black,
               height: 200.00,
@@ -72,26 +77,11 @@ class _MyAppState extends State<MyApp> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-            onPressed: null, foregroundColor: Colors.white, child: Text('+')),
+            onPressed: null,
+            foregroundColor: Colors.white,
+            child: Icon(FontAwesomeIcons.plus)),
       ),
     );
-
-    /*  child: DataTable(
-            columns: [
-              DataColumn(label: Text('SIGN')),
-              DataColumn(label: Text('NAME')),
-              DataColumn(label: Text('RANK')),
-              DataColumn(label: Text('PRICE')),
-            ],
-            rows: [
-              DataRow(cells: [
-                DataCell(Text(coinSymbol != null ? coinSymbol : "Loading...")),
-                DataCell(Text(name != null ? name : "Loading...")),
-                DataCell(Text(rank != null ? rank : "Loading...")),
-                DataCell(Text(priceUsd != null ? priceUsd : "Loading...")),
-              ])
-            ],
-          ),*/
   }
 
   Icon getCurrencyIcon(String sym) {
