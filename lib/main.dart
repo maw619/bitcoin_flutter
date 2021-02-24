@@ -38,44 +38,45 @@ class _MyAppState extends State<MyApp> {
     this.getCrypto();
   }
 
-//temp != null ? temp.toString() + "\u00B0" : "Loading",
   @override
   Widget build(BuildContext context) {
-    const PrimaryColor = const Color(0xFF000000);
     return MaterialApp(
-        theme: ThemeData(
-          primaryColor: PrimaryColor,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Cryptocurrency Ticker'),
+          centerTitle: true,
+          backgroundColor: Colors.blue[700],
         ),
-        home: Scaffold(
-            //backgroundColor: Colors.black,
-            //appBar: AppBar(title: Text('Crypto Ticker')),
-            body: SafeArea(
-          child: Container(
-              width: 600.00,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage('images/holly.png'),
-                fit: BoxFit.cover,
-              )),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    child: new Text(coinSymbol != null
-                        ? coinSymbol.toString()
-                        : "Loading..."),
-                  ),
-                  Container(
-                    child: Text(name != null ? name.toString() : "Loading..."),
-                  ),
-                  Container(
-                      child:
-                          Text(rank != null ? rank.toString() : "Loading...")),
-                  Container(
-                      child: Text(priceUsd != null
-                          ? priceUsd.toString()
-                          : "Loading...")),
-                ],
-              )),
-        )));
+        body: Column(
+          children: <Widget>[
+            Container(
+              child: Text(coinSymbol != null ? coinSymbol : "Loading..."),
+              color: Colors.blue[600],
+              height: 200.00,
+              width: double.infinity,
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+            onPressed: null, foregroundColor: Colors.white, child: Text('+')),
+      ),
+    );
+
+    /*  child: DataTable(
+            columns: [
+              DataColumn(label: Text('SIGN')),
+              DataColumn(label: Text('NAME')),
+              DataColumn(label: Text('RANK')),
+              DataColumn(label: Text('PRICE')),
+            ],
+            rows: [
+              DataRow(cells: [
+                DataCell(Text(coinSymbol != null ? coinSymbol : "Loading...")),
+                DataCell(Text(name != null ? name : "Loading...")),
+                DataCell(Text(rank != null ? rank : "Loading...")),
+                DataCell(Text(priceUsd != null ? priceUsd : "Loading...")),
+              ])
+            ],
+          ),*/
   }
 }
