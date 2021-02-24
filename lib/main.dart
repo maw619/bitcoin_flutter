@@ -1,8 +1,7 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,16 +41,31 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         appBar: AppBar(
           title: Text('Cryptocurrency Ticker'),
           centerTitle: true,
-          backgroundColor: Colors.blue[700],
+          backgroundColor: Colors.black,
         ),
         body: Column(
           children: <Widget>[
             Container(
-              child: Text(coinSymbol != null ? coinSymbol : "Loading..."),
-              color: Colors.blue[600],
+              child: coinSymbol != null
+                  ? getCurrencyIcon(coinSymbol)
+                  : "Loading...",
+              color: Colors.black,
+              height: 200.00,
+              width: double.infinity,
+            ),
+            Container(
+              child: priceUsd != null
+                  ? Center(
+                      child: Text(
+                      priceUsd.toString(),
+                      style: TextStyle(color: Colors.white),
+                    ))
+                  : "Loading...",
+              color: Colors.black,
               height: 200.00,
               width: double.infinity,
             ),
@@ -78,5 +92,21 @@ class _MyAppState extends State<MyApp> {
               ])
             ],
           ),*/
+  }
+
+  Icon getCurrencyIcon(String sym) {
+    Icon icon;
+
+    if (sym.contains('BTC')) {
+      icon = Icon(
+        FontAwesomeIcons.bitcoin,
+        color: Colors.amber[600],
+        size: 100.0,
+      );
+    } else {
+      icon = Icon(FontAwesomeIcons.questionCircle);
+    }
+
+    return icon;
   }
 }
